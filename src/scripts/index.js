@@ -1,12 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
 
 const app = express();
 const router = express.Router();
 
 app.use('/', router);
-app.use(express.static('src/pages'));
+app.use(express.static('public/pages'));
 
 app.use(morgan('tiny'));
 
