@@ -1,27 +1,14 @@
-let curriculo = {name};
+import express from 'express';
+import morgan from 'morgan';
 
-function makeCurriculum() {
-  document.getElementById('formulario').addEventListener(
-    'submit', stopDefAction, false
-  );
+const app = express();
+const router = express.Router();
 
-  curriculo.name = document.getElementById('name').value;
+app.use('/', router);
+app.use(express.static('public/pages'));
 
-  document.body.innerHTML = `
-    <body onload="generateCurriculum()">
-      <header>
-          <h1 id="name">${curriculo.name}</h1>
-      </header>
-      <section>
-      </section>
-      <footer></footer>
+app.use(morgan('tiny'));
 
-      <script src="../scripts/index.js"></script>`
-
-  window.print();
-
-}
-
-function stopDefAction(evt) {
-  evt.preventDefault();
-}
+app.listen(3000, () => {
+  console.log("Servidor rodando em http://localhost:3000")
+});

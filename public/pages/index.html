@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crie o seu Currículo Agora!</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../styles/style.css">
+=======
+
+    <!-- <link rel="stylesheet" href="../styles/style.css"> -->
+>>>>>>> 48eda60ac05de0d97d5f0851c8387a2a0068f154
 </head>
 <body>
     <header>
         <h1>Crie o seu Currículo Automaticamente agora</h1>
     </header>
     <section>
+<<<<<<< HEAD
         <form action="." method="" id="formulario">
 
             <div class="dadosPessoais">
@@ -36,12 +42,46 @@
                 <label for="name">experiencia</label>
                 <input type="text" name="name" id="name">
             </div>
+=======
+        <form action="." method="post" id="formulario">
+            <label for="name"></label>
+            <input type="text" name="name" id="name">
+>>>>>>> 48eda60ac05de0d97d5f0851c8387a2a0068f154
 
-            <button type="submit" onclick="makeCurriculum()">Quero Criar Agora!</button>
+            <button type="submit" onclick="saveInfos()">Quero Criar Agora!</button>
         </form>
     </section>
-    <footer></footer>
+    <script>
+        let curriculo = {name};
 
-    <script src="../../src/index.js"></script>
+        document.getElementById('formulario').addEventListener(
+        'submit', stopDefAction, false
+        );
+
+        function saveInfos() {
+        curriculo.name = document.getElementById('name').value;
+
+        console.log(curriculo.name)
+
+        document.body.innerHTML = `<body onload="generateCurriculum()"><header><h1 id="name">${curriculo.name}</h1>
+        </header>
+        <section>
+        </section>
+        <footer></footer>`
+
+        window.print();
+        }
+
+        function generateCurriculum() {
+        console.log(curriculo.name);
+
+        document.getElementById('name').innerText = curriculo.name;
+        }
+
+        function stopDefAction(evt) {
+        evt.preventDefault();
+        }
+    </script>
+    <footer></footer>
 </body>
 </html>
