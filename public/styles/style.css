@@ -14,10 +14,6 @@ body{
     flex-direction: column;
 }
 
-div.dadosPessoais{
-    border: solid 2px var(--sandy-brown);
-}
-
-h1 {
-    color: var(--shadow-blue);
+section{
+    max-width: 80vw;
 }
