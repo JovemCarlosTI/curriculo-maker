@@ -1,0 +1,19 @@
+*{
+    --dark-slate-gray: #3e4e50ff;
+    --dark-cornflower-blue: #304269ff;
+    --shadow-blue: #6d8eadff;
+    --alice-blue: #d9e8f5ff;
+    --mellow-apricot: #f8bd7fff;
+    --sandy-brown: #f5ac72ff;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+section{
+    max-width: 80vw;
+}
