@@ -5,40 +5,385 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crie o seu Currículo Agora!</title>
 
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <!-- <link rel="stylesheet" href="../styles/style.css"> -->
 </head>
-<body>
+<body style="margin: 2%;">
     <header>
-        <h1>Crie o seu Currículo Automaticamente agora</h1>
+        <h1 class="text-center">Crie o seu Currículo Automaticamente Agora!</h1>
     </header>
     <section>
-        <form action="." method="post" id="formulario">
-            <label for="name"></label>
-            <input type="text" name="name" id="name">
+        <form action="." method="post" id="formulario" class="row g-3" style="margin: 10%; margin-top: 18px;">
+            <h2>Dados Pessoais</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="name" class="form-label">Nome Completo*</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="idade" class="form-label">Idade</label>
+                <input type="number" class="form-control" id="idade">
+                <div id="idadeHelp" class="form-text">Opcional</div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="telefone" class="form-label">Telefone para Contato*</label>
+                <input type="text" class="form-control" id="telefone" placeholder="+55 11 91234-5678">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="email" class="form-label">Endereço de E-mail*</label>
+                <input type="email" class="form-control" id="email" placeholder="ex: joaozincraft@gmail.com" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col-4">
+                <label for="pais" class="form-label">País*</label>
+                <input type="text" class="form-control" id="pais">
+            </div>
+            <div class="mb-3 col-4">
+                <label for="estado" class="form-label">Estado*</label>
+                <input type="text" class="form-control" id="estado">
+            </div>
+            <div class="mb-3 col-4">
+                <label for="cidade" class="form-label">Cidade*</label>
+                <input type="text" class="form-control" id="cidade">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="linkedin" class="form-label">LinkedIn</label>
+                <input type="text" class="form-control" id="linkedin" placeholder="@username">
+                <div id="linkedinHelp" class="form-text">Opcional</div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="github" class="form-label">Github</label>
+                <input type="text" class="form-control" id="github" placeholder="@username">
+                <div id="githubHelp" class="form-text">Opcional</div>
+            </div>
 
-            <button type="submit" onclick="saveInfos()">Quero Criar Agora!</button>
+            <h2>Habilidades</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="nome_habil1" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil1" placeholder="Excel">
+                <select class="form-select" id="nivel_habil1">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil2" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil2" placeholder="Excel">
+                <select class="form-select" id="nivel_habil2">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil3" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil3" placeholder="Excel">
+                <select class="form-select" id="nivel_habil3">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil4" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil4" placeholder="Excel">
+                <select class="form-select" id="nivel_habil4">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil5" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil5" placeholder="Excel">
+                <select class="form-select" id="nivel_habil5">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <h2>Objetivo Profissional</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="area" class="form-label">Área de Atuação</label>
+                <input type="text" class="form-control" id="area">
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="especi" class="form-label">Especialização</label>
+                <input type="text" class="form-control" id="especi">
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <h2>Formação Acadêmica</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="nivelGraduacao" class="form-label">Nível da Graduação</label>
+                <input type="text" class="form-control" id="nivelgr">
+                <div id="nivelGraduacaoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nomeInstituicao" class="form-label">Nome da Instituição</label>
+                <input type="text" class="form-control" id="nomeInstituicao">
+                <div id="nomeInstituicaoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="periodo" class="form-label">Período</label>
+                <input type="text" class="form-control" id="periodo">
+                <div id="periodoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="duracao" class="form-label">Duração</label>
+                <input type="text" class="form-control" id="duracao">
+                <div id="duracaoHelp" class="form-text"></div>
+            </div>
+          
+          
+          <h2>Experiência Profissional</h2>
+          <hr>
+          <div class="mb-3 col-6">
+            <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
+            <input type="text" class="form-control" id="n-empre">
+            <div id="nomeEmpresaHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="periEmpresa" class="form-label">Período na Empresa</label>
+            <input type="text" class="form-control" id="p-empre">
+            <div id="periEmpresaHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="cargo" class="form-label">Cargo</label>
+            <input type="text" class="form-control" id="cargo">
+            <div id="cargoHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="desEmpresa" class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="desEmpresa" placeholder="Breve descrição das atividades desenvolvidas na empresa">
+            <div id="periEmpresaHelp" class="form-text"></div>
+        </div>
+        <h2>Cursos Extracurriculares</h2>
+        <hr>
+        <div class="mb-3 col-6">
+            <label for="nCurso" class="form-label">Nome do Curso</label>
+            <input type="text" class="form-control" id="nCurso">
+            <div id="nCursoHelp" class="form-text"></div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="dCurso" class="form-label">Duração do Curso</label>
+            <input type="text" class="form-control" id="dCurso">
+            <div id="dCursoHelp" class="form-text"></div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="tCurso" class="form-label">Tipo do Curso</label>
+            <input type="text" class="form-control" id="tCurso" placeholder="Cursos de especialização, Cursos de Idiomas...">
+            <div id="tCursoHelp" class="form-text"></div>
+          </div>
+           
+            <button type="submit" onclick="saveInfos()" class="btn btn-primary">Quero Criar Agora!</button>
         </form>
     </section>
+
+    <footer></footer>
+
     <script>
-        let curriculo = {name};
+        let curriculo = {
+            name,
+            idade,
+            telefone,
+            email,
+            pais,
+            estado,
+            cidade,
+            linkedin,
+            github,
+            habilidades: [
+                {
+                    nome: '',
+                    nivel: ''
+                },
+                {
+                    nome: '',
+                    nivel: ''
+                },
+                {
+                    nome: '',
+                    nivel: ''
+                },
+                {
+                    nome: '',
+                    nivel: ''
+                },
+                {
+                    nome: '',
+                    nivel: ''
+                }
+            ],
+            objetivo_profissional: {
+                area_atuacao : '',
+                especializacao: ''
+            },
+            formacao_academica: {
+                    nivel_graduacao: '',
+                    nome_instituicao: '',
+                    periodo: '',
+                    duracao: ''
+                },
+            experiencia_profissional: [
+                {
+                    nome_empresa: '',
+                    cargo: '',
+                    periodo: '',
+                    descricao: ''
+                },
+                {
+                    nome_empresa: '',
+                    cargo: '',
+                    periodo: '',
+                    descricao: ''
+                },
+                {
+                    nome_empresa: '',
+                    cargo: '',
+                    periodo: '',
+                    descricao: ''
+                }
+            ],
+            cursos: [
+                {
+                    nome_curso: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_curso: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_curso: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_curso: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_curso: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                }
+
+            ],
+            atividades_complementares: [
+                {
+                    nome_atividade: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_atividade: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_atividade: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_atividade: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                },
+                {
+                    nome_atividade: '',
+                    duracao: '',
+                    tipo: '',
+                    descricao: ''
+                }
+
+            ]
+        };
 
         document.getElementById('formulario').addEventListener(
         'submit', stopDefAction, false
         );
 
         function saveInfos() {
+        // Dados Pessoais
         curriculo.name = document.getElementById('name').value;
+        curriculo.idade = Number(document.getElementById('idade').value);
+        curriculo.telefone = document.getElementById('telefone').value;
+        curriculo.email = document.getElementById('email').value;
 
-        console.log(curriculo.name)
+        curriculo.pais = document.getElementById('pais').value;
+        curriculo.estado = document.getElementById('estado').value;
+        curriculo.cidade = document.getElementById('cidade').value;
+        
+        curriculo.linkedin = document.getElementById('linkedin').value;
+        curriculo.github = document.getElementById('github').value;
 
-        document.body.innerHTML = `<body onload="generateCurriculum()"><header><h1 id="name">${curriculo.name}</h1>
-        </header>
-        <section>
-        </section>
-        <footer></footer>`
+        // Habilidades
+        getHabilidades();
+        
+        curriculo.objetivo_profissional.area_atuacao = document.getElementById('area').value;
+        curriculo.objetivo_profissional.especializacao = document.getElementById('especi').value;
 
-        window.print();
+        curriculo.formacao_academica = {
+            nivel_graduacao: document.getElementById('nivelgr').value,
+            nome_instituicao: document.getElementById('nomeInstituicao').value,
+            periodo: document.getElementById('periodo').value,
+            duracao: document.getElementById('duracao').value
+        };
         }
+
+        function getHabilidades() {
+            let habilidades = [];
+            for (let i = 0; i < curriculo.habilidades.length; i++) {
+                let habilidade = document.getElementById('nome_habil' + (i + 1)).value;
+
+                
+                if (habilidade !== '') {
+                    curriculo.habilidades[i] = {
+                        nome: habilidade,
+                        nivel: document.getElementById('nivel_habil' + (i + 1)).value
+                    }
+                }
+            }
+        }
+        
+        console.log(curriculo);
+
+        // document.body.innerHTML = `<body onload="generateCurriculum()"><header><h1 id="name">${curriculo.name}</h1>
+        // </header>
+        // <section>
+        // </section>
+        // <footer></footer>`
+
+        // window.print();
 
         function generateCurriculum() {
         console.log(curriculo.name);
@@ -50,6 +395,8 @@
         evt.preventDefault();
         }
     </script>
-    <footer></footer>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
