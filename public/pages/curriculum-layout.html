@@ -10,8 +10,187 @@
 
     <link rel="stylesheet" href="../styles/style.css">
 </head>
-<body onload="generateCurriculum()">
-    <header class="">
+<body class="" onload="generateCurriculum()">
+
+    <main class="px-5">
+        <section class="row gy-4 mt-3 justify-content-center grid " >
+            <h2>Dados Pessoais</h2>
+            <hr>
+            <div class="mb-3 mx-3 rounded-3 border col-5  bg-light text-dark">
+                <p class="text-muted ">Nome Completo</p>
+                <h4>Nome da pessoa</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-5  bg-light text-dark">
+                <p class="text-muted ">Idade</p>
+                <h4>16</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
+                <p class="text-muted ">Telefone</p>
+                <h4>83 91234-5678</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
+                <p class="text-muted ">E-mail</p>
+                <h4>joaozincraft@gmail.com</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-10 p-2 bg-light text-dark">
+                <p class="text-muted ">Endereço</p>
+                <h4>Endereço país, estado, cidade</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
+                <p class="text-muted ">LinkedIn</p>
+                <h4>username</h4>
+            </div>
+            
+            <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
+                <p class="text-muted ">Github</p>
+                <h4>github.io/username</h4>
+            </div>
+            
+
+            <h2>Habilidades</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="nome_habil1" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil1" placeholder="Excel">
+                <select class="form-select" id="nivel_habil1">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil2" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil2" placeholder="Excel">
+                <select class="form-select" id="nivel_habil2">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil3" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil3" placeholder="Excel">
+                <select class="form-select" id="nivel_habil3">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil4" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil4" placeholder="Excel">
+                <select class="form-select" id="nivel_habil4">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nome_habil5" class="form-label">Nome da Habilidade</label>
+                <input type="text" class="form-control" id="nome_habil5" placeholder="Excel">
+                <select class="form-select" id="nivel_habil5">
+                    <option selected>Nível da habilidade</option>
+                    <option value="1">Básico</option>
+                    <option value="2">Intermediário</option>
+                    <option value="3">Avançado</option>
+                  </select>
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <h2>Objetivo Profissional</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="area" class="form-label">Área de Atuação</label>
+                <input type="text" class="form-control" id="area">
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="especi" class="form-label">Especialização</label>
+                <input type="text" class="form-control" id="especi">
+                <div id="nomeHelp" class="form-text"></div>
+            </div>
+            <h2>Formação Acadêmica</h2>
+            <hr>
+            <div class="mb-3 col-6">
+                <label for="nivelGraduacao" class="form-label">Nível da Graduação</label>
+                <input type="text" class="form-control" id="nivelgr">
+                <div id="nivelGraduacaoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nomeInstituicao" class="form-label">Nome da Instituição</label>
+                <input type="text" class="form-control" id="nomeInstituicao">
+                <div id="nomeInstituicaoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="periodo" class="form-label">Período</label>
+                <input type="text" class="form-control" id="periodo">
+                <div id="periodoHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="duracao" class="form-label">Duração</label>
+                <input type="text" class="form-control" id="duracao">
+                <div id="duracaoHelp" class="form-text"></div>
+            </div>
+          
+          
+          <h2>Experiência Profissional</h2>
+          <hr>
+          <div class="mb-3 col-6">
+            <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
+            <input type="text" class="form-control" id="n-empre">
+            <div id="nomeEmpresaHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="periEmpresa" class="form-label">Período na Empresa</label>
+            <input type="text" class="form-control" id="p-empre">
+            <div id="periEmpresaHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="cargo" class="form-label">Cargo</label>
+            <input type="text" class="form-control" id="cargo">
+            <div id="cargoHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="desEmpresa" class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="desEmpresa" placeholder="Breve descrição das atividades desenvolvidas na empresa">
+            <div id="periEmpresaHelp" class="form-text"></div>
+        </div>
+        <h2>Cursos Extracurriculares</h2>
+        <hr>
+        <div class="mb-3 col-6">
+            <label for="nCurso" class="form-label">Nome do Curso</label>
+            <input type="text" class="form-control" id="nCurso">
+            <div id="nCursoHelp" class="form-text"></div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="dCurso" class="form-label">Duração do Curso</label>
+            <input type="text" class="form-control" id="dCurso">
+            <div id="dCursoHelp" class="form-text"></div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="tCurso" class="form-label">Tipo do Curso</label>
+            <input type="text" class="form-control" id="tCurso" placeholder="Cursos de especialização, Cursos de Idiomas...">
+            <div id="tCursoHelp" class="form-text"></div>
+          </div>
+           
+            <button type="submit" onclick="saveInfos()" class="btn btn-primary">Quero Criar Agora!</button>
+    </section>
+    </main>
+
+
+    <!-- <header class="">
         <h1 class="text-center pt-1 pb-3 bg-primary bg-gradient" id="name">Nome aqui</h1>
 
         <div class="container flex-wrap gap-4 d-flex justify-content-around">
@@ -92,9 +271,8 @@
             </div>
         </div>
         
-    </header>
-    <section>
-    </section>
+    </header> -->
+
     <footer></footer>
 
      <!-- Option 1: Bootstrap Bundle with Popper -->
