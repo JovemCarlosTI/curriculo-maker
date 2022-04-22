@@ -12,9 +12,9 @@
     <!-- <link rel="stylesheet" href="../styles/style.css"> -->
 </head>
 
-<body style="margin: 2%;">
+<body>
     <header>
-        <h1 class="text-center">Crie o seu Currículo Automaticamente Agora!</h1>
+        <h1 class="text-center" style="margin-top: 24px;">Crie o seu Currículo Automaticamente Agora!</h1>
     </header>
     <section>
         <form action="." method="post" id="formulario" class="row g-3" style="margin: 10%; margin-top: 18px;">
@@ -249,11 +249,12 @@
                 <div id="tAtivHelp " class="form-text ">Opcional</div>
             </div>
 
-            <div class="mb-3 col-6 ">
-                <p>É realizada atualmente? </p>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="atualmente1">
-                  </div>
+            <div class="col-6">
+                <label for="atualmente1" class="form-label">Atualmente?</label>
+                <select class="form-select" id="atualmente1">
+                    <option selected value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
             </div>
 
             <div class="mb-3 col-6 ">
@@ -272,11 +273,12 @@
                 <div id="tAtivHelp " class="form-text ">Opcional</div>
             </div>
 
-            <div class="mb-3 col-6 ">
-                <p>É realizada atualmente? </p>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="atualmente2">
-                  </div>
+            <div class="col-6">
+                <label for="atualmente2" class="form-label">Atualmente?</label>
+                <select class="form-select" id="atualmente2">
+                    <option selected value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
             </div>
 
             <div class="mb-3 col-6 ">
@@ -295,12 +297,14 @@
                 <div id="tAtivHelp " class="form-text ">Opcional</div>
             </div>
 
-            <div class="mb-3 col-6 ">
-                <p>É realizada atualmente? </p>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="atualmente3">
-                  </div>
+            <div class="col-6">
+                <label for="atualmente3" class="form-label">Atualmente?</label>
+                <select class="form-select" id="atualmente3">
+                    <option selected value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
             </div>
+
 
             <button type="submit " onclick="saveInfos() " class="btn btn-primary ">Quero Criar Agora!</button>
         </form>

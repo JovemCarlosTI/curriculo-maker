@@ -130,7 +130,7 @@ function saveInfos() {
       <section class="row gy-4 mt-3 justify-content-center grid " >
           <h2>Dados Pessoais</h2>
           <hr>
-          <div class="mb-3 mx-3 rounded-3 border col-5  bg-light text-dark">
+          <div class="mb-3 mx-3 rounded-3 border col-10  bg-light text-dark">
               <p class="text-muted ">Nome Completo</p>
               <h4>${curriculo.name}</h4>
           </div>
@@ -145,7 +145,7 @@ function saveInfos() {
               <h4>${curriculo.telefone}</h4>
           </div>
           
-          <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
+          <div class="mb-3 mx-3 rounded-3 border col-10 p-2 bg-light text-dark">
               <p class="text-muted ">E-mail</p>
               <h4>${curriculo.email}</h4>
           </div>
@@ -322,22 +322,18 @@ function getAtividades() {
               tipo: document.getElementById('tAtiv' + (i + 1)).value,
               atualmente: document.getElementById('atualmente' + (i + 1)).value
           }
+          console.log(document.getElementById('atualmente' + (i + 1)).value)
       }
   }
 }
 
 function printAtividades() {
   let response = '';
-  let atualmente;
 
   for (let i = 0; i < curriculo.atividades_complementares.length; i++) {
-      if (curriculo.atividades_complementares[i].nome !== '' && curriculo.atividades_complementares[i].nome !== undefined) {
-          if (curriculo.atividades_complementares.atualmente) {
-                      atualmente = 'Sim';
-                  } else {
-                      atualmente = 'Não';
-                  }
+      let atualmente;
 
+      if (curriculo.atividades_complementares[i].nome !== '' && curriculo.atividades_complementares[i].nome !== undefined) {
           response += `
           <div class="mb-3 mx-3 rounded-3 border col-5 p-2 bg-light text-dark">
               <p class="text-muted">Nome da Atividade</p>
@@ -350,7 +346,7 @@ function printAtividades() {
               <h4>${curriculo.atividades_complementares[i].tipo}</h4>
 
               <p class="text-muted">Participando Atualmente?</p>
-              <h4>${atualmente}</h4>
+              <h4>${curriculo.atividades_complementares[i].atualmente}</h4>
           </div>`
       }
   }
