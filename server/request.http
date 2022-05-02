@@ -1,0 +1,56 @@
+### Post Create Curriculum
+POST http://localhost:3000/curriculum
+Content-Type: application/json
+
+{
+  "name": "Carlos",
+  "idade": "17",
+  "telefone": "4002-8922",
+  "email": "carlosandre116@gmail.com",
+  "pais": "Brasil",
+  "estado": "Paraíba",
+  "cidade": "João Pessoa",
+  "linkedin": "@jovemcarlosti",
+  "github": "jovemcarlosti",
+  "habilidades": [
+    {
+      "nome": "Excel",
+      "nivel": "Básico"
+    },
+    {
+      "nome": "Inglês",
+      "nivel": "Avançado"
+    }
+  ],
+  "objetivo_profissional": {
+    "area_atuacao": "Informática",
+    "especializacao": "Programação"
+  },
+  "formacao_academica": {
+    "nivel_graduacao": "Técnico",
+    "nome_instituicao": "IFPB",
+    "periodo": "01/01/2019 - 31/12/2022",
+    "duracao": "4 anos"
+  },
+  "experiencia_profissional": {
+    "nome_empresa": "Juristas Certificadora Digital",
+    "cargo": "Suporte Técnico",
+    "periodo": "13/10/2021 - 17/03/2022",
+    "descricao": "Jovem Aprendiz"
+  },
+  "cursos": [
+    {
+      "nome": ".",
+      "duracao": ".",
+      "tipo": "."
+    }
+  ],
+  "atividades_complementares": [
+    {
+      "nome": ".",
+      "duracao": ".",
+      "tipo": ".",
+      "atualmente": "."
+    }
+  ]
+}
