@@ -1,3 +1,5 @@
+import Database from '../../server/database/database.js';
+
 let curriculo = {
   name: '',
   idade: '',
@@ -75,14 +77,55 @@ let curriculo = {
 
 // Renderiza o currículo no html
 
-function getCurriculo() {
+async function getCurriculo(id) {
+    const db = await Database.connect();
+
+  const sql = `
+    SELECT
+      *
+    FROM
+      curriculo
+    WHERE
+    id = ?
+  `;
+
+  const curriculo = await db.get(sql, [id]);
+
+  return curriculo;
+}
+
+async function readAll() {
+    const db = await Database.connect();
+
+    const sql = `
+      SELECT
+        *
+      FROM
+        curriculo
+    `;
+  
+    const curriculo = await db.all(sql);
+  
     return curriculo;
 }
 
-function setCurriculo(tempCurriculo) {
-    console.log(tempCurriculo)
+async function setCurriculo(tempCurriculo) {
+    const db = await Database.connect();
 
-    curriculo = tempCurriculo;
+
+    const {nome, idade, tel, email, linkedin, github} = tempCurriculo;
+
+    const sql = `
+      INSERT INTO
+        curriculo (nome, idade, tel, email, linkedin, github)
+      VALUES
+        (?, ?, ?, ?, ?, ?)
+    `;
+
+  
+    const {lastID} = await db.run(sql, [nome, idade, tel, email, linkedin, github]);
+  
+    return getCurriculo(lastID);
 }
 
-export default {getCurriculo, setCurriculo};
+export default {getCurriculo, setCurriculo, readAll};

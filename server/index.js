@@ -29,7 +29,7 @@ app.get('/curriculum', (req, res) => {
 });
 
 app.get('/curriculum-infos', (req, res) => {
-  res.send(curriculo.getCurriculo())
+  res.send(curriculo.readAll())
 })
 
 app.listen(8080, () => {
