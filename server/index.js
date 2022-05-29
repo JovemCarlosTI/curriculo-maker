@@ -25,7 +25,6 @@ app.post('/curriculum', async (req, res) => {
 });
 
 app.get('/curriculum', (req, res) => {
-  console.log(req.params)
   res.sendFile(path.join(__dirname, '/../public/curriculum-layout.html'));
 });
 
