@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import curriculo from '../public/src/curriculum.js';
+import curriculo from './models/curriculum.js';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
@@ -18,18 +18,30 @@ app.use(express.json())
 
 app.use(morgan('tiny'));
 
-app.post('/curriculum', (req, res) => {
-  curriculo.setCurriculo(req.body);
-
-  res.status(200).json(curriculo.getCurriculo());
+app.post('/curriculum', async (req, res) => {
+  const lastID = await curriculo.setCurriculo(req.body)
+  
+  res.send({"id": `${lastID}`});
 });
 
 app.get('/curriculum', (req, res) => {
+  console.log(req.params)
   res.sendFile(path.join(__dirname, '/../public/curriculum-layout.html'));
 });
 
 app.get('/curriculum-infos', (req, res) => {
-  res.send(curriculo.getCurriculo())
+
+  curriculo.readAll().then(result => {
+    res.send(result)
+
+ });
+})
+
+app.get('/curriculum-info/id/:id', async (req, res) => {
+  const id = parseInt((req.params.id));
+  const response = await curriculo.getCurriculo(id)
+
+ res.json(response);
 })
 
 app.listen(8080, () => {

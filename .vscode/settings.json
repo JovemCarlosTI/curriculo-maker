@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:curriculo-maker-v2}/server/database/db.sqlite",
+            "name": "Conexão"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
