@@ -112,7 +112,7 @@ async function setCurriculo(tempCurriculo) {
     
     const {nome, idade, tel, email, linkedin,
       github, pais, estado, cidade, nomeArea, nomeEspecializacao, nomeInstituicao,
-      nomeEmpresa, cargoExp, periodoExp, decricaoExp, atividades_complementares, nivelFormacao,
+      nomeEmpresa, cargoExp, periodoExp, descricaoExp, atividades_complementares, nivelFormacao,
       nomeFormacao, periodoFormacao, 
       duracaoFormacao, nomeCur, duracaoCur, tipoCur, habilidades}
       = tempCurriculo;
@@ -248,7 +248,7 @@ async function setCurriculo(tempCurriculo) {
         (?,?,?)
     `;
 
-    lastID = await db.run(experienciaProfissionalSQL, [cargoExp, periodoExp, decricaoExp]);
+    lastID = await db.run(experienciaProfissionalSQL, [cargoExp, periodoExp, descricaoExp]);
       
 
     const lastIDExperienciaProfisional = lastID.lastID;
