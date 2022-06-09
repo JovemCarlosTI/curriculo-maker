@@ -3,6 +3,11 @@ import morgan from 'morgan';
 import curriculo from './models/curriculum.js';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import { jsPDF } from "jspdf";
+
+// Default export is a4 paper, portrait, using millimeters for units
+const doc = new jsPDF();
+
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -41,7 +46,15 @@ app.get('/curriculum-info/id/:id', async (req, res) => {
   const response = await curriculo.getCurriculo(id)
 
  res.json(response);
-})
+});
+
+app.get('/pdf', (req, res) => {
+  doc.text("Hello world!", 10, 10);
+  doc.textWithLink("aaaaaaaaa");
+  doc.save("a4.pdf");
+
+  res.send(doc);
+});
 
 app.listen(8080, () => {
   console.log("Servidor rodando em http://localhost:8080")
