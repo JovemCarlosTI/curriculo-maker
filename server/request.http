@@ -44,3 +44,27 @@ GET http://localhost:8080/curriculum-infos
 
 ### Read Specific Curriculum
 GET http://localhost:8080/curriculum-info/id/5
+
+### Post Create User
+POST http://localhost:8080/create-user
+Content-Type: application/json
+
+{
+  "login": "ja@gmail.com",
+  "senha": "cavalo"
+}
+
+### Read All
+GET http://localhost:8080/usuarios-infos
+
+### Read Specific User
+GET http://localhost:8080/usuario-info/id/1
+
+### Auth User
+POST http://localhost:8080/auth-user
+Content-Type: application/json
+
+{
+  "login": "teste@gmail.com",
+  "senha": "cavalo"
+}
