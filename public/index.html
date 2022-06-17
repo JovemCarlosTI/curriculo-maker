@@ -11,6 +11,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     
     <link href="style/index.css" rel="stylesheet">
+<<<<<<< HEAD
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -36,6 +37,21 @@
         </div>
       </nav>
     
+=======
+</head>
+
+
+<body onload="progressBar()">
+    <header>
+        <h1 class="text-center" style="margin-top: 24px;">Crie o seu Currículo Automaticamente Agora!</h1>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"
+            id="progress-bar"></div>
+          </div>
+    </header>
+>>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
     <section>
         <form action="/curriculum" method="post" id="formulario" class="row g-3" style="margin: 10%; margin-top: 18px;">
             <h2>Dados Pessoais</h2>
@@ -329,6 +345,7 @@
     <footer></footer>
     <script src="src/menu.js"></script>
 
+<<<<<<< HEAD
     <script>
         let curriculo = {
                 nome: '',
@@ -390,6 +407,189 @@
 
 
             };
+=======
+    <script type="module" src="/src/curriculum.js"></script>
+    <script>
+      
+        // Prepara as informações como objeto JS
+        async function saveInfos() {
+
+          let curriculo = {
+  name: '',
+  idade: '',
+  telefone: '',
+  email: '',
+  pais: '',
+  estado: '',
+  cidade: '',
+  linkedin: '',
+  github: '',
+  habilidades: [{
+      nome: '',
+      nivel: ''
+  }, {
+      nome: '',
+      nivel: ''
+  }, {
+      nome: '',
+      nivel: ''
+  }, {
+      nome: '',
+      nivel: ''
+  }, {
+      nome: '',
+      nivel: ''
+  }],
+  objetivo_profissional: {
+      area_atuacao: '',
+      especializacao: ''
+  },
+  formacao_academica: {
+      nivel_graduacao: '',
+      nome_instituicao: '',
+      periodo: '',
+      duracao: ''
+  },
+  experiencia_profissional: {
+      nome_empresa: '',
+      cargo: '',
+      periodo: '',
+      descricao: ''
+  },
+  cursos: [{
+          nome: '',
+          duracao: '',
+          tipo: ''
+      }, {
+          nome: '',
+          duracao: '',
+          tipo: ''
+      }, {
+          nome: '',
+          duracao: '',
+          tipo: ''
+      }
+  ],
+  atividades_complementares: [{
+          nome: '',
+          duracao: '',
+          tipo: '',
+          atualmente: ''
+      }, {
+          nome: '',
+          duracao: '',
+          tipo: '',
+          atualmente: ''
+      }, {
+          nome: '',
+          duracao: '',
+          tipo: '',
+          atualmente: ''
+      }
+  ]
+};
+          
+          // Dados Pessoais
+          curriculo.name = document.getElementById('name').value;
+          curriculo.idade = Number(document.getElementById('idade').value);
+          curriculo.telefone = document.getElementById('telefone').value;
+          curriculo.email = document.getElementById('email').value;
+        
+          curriculo.pais = document.getElementById('pais').value;
+          curriculo.estado = document.getElementById('estado').value;
+          curriculo.cidade = document.getElementById('cidade').value;
+        
+          curriculo.linkedin = document.getElementById('linkedin').value;
+          curriculo.github = document.getElementById('github').value;
+        
+          // Habilidades
+          getHabilidades();
+        
+          curriculo.objetivo_profissional.area_atuacao = document.getElementById('area').value;
+          curriculo.objetivo_profissional.especializacao = document.getElementById('especi').value;
+        
+          curriculo.formacao_academica = {
+              nivel_graduacao: document.getElementById('nivelgr').value,
+              nome_instituicao: document.getElementById('nomeInstituicao').value,
+              periodo: document.getElementById('periodo').value,
+              duracao: document.getElementById('duracao').value
+          };
+        
+          curriculo.experiencia_profissional = {
+              nome_empresa: document.getElementById('nomeEmpresa').value,
+              cargo: document.getElementById('cargo').value,
+              periodo: document.getElementById('periodoEmpresa').value,
+              descricao: document.getElementById('desEmpresa').value
+          };
+          
+          getCursos();
+        
+          getAtividades();
+        
+          function getHabilidades() {
+            for (let i = 0; i < curriculo.habilidades.length; i++) {
+                let habilidade = document.getElementById('nome_habil' + (i + 1)).value;
+          
+          
+                if (habilidade !== '') {
+                    curriculo.habilidades[i] = {
+                        nome: habilidade,
+                        nivel: document.getElementById('nivel_habil' + (i + 1)).value
+                    }
+                }
+            }
+          }
+          
+          function getCursos() {
+            for (let i = 0; i < curriculo.cursos.length; i++) {
+                let curso = document.getElementById('nCurso' + (i + 1)).value;
+          
+          
+                if (curso !== '') {
+                    curriculo.cursos[i] = {
+                        nome: curso,
+                        duracao: document.getElementById('dCurso' + (i + 1)).value,
+                        tipo: document.getElementById('tCurso' + (i + 1)).value
+                    }
+                }
+            }
+          }
+          
+          function getAtividades() {
+            for (let i = 0; i < curriculo.atividades_complementares.length; i++) {
+                let atividade = document.getElementById('nAtiv' + (i + 1)).value;
+          
+          
+                if (atividade !== '') {
+                    curriculo.atividades_complementares[i] = {
+                        nome: atividade,
+                        duracao: document.getElementById('dAtiv' + (i + 1)).value,
+                        tipo: document.getElementById('tAtiv' + (i + 1)).value,
+                        atualmente: document.getElementById('atualmente' + (i + 1)).value
+                    }
+                }
+            }
+          }
+        
+          await fetch("/curriculum", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(curriculo),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Success:", data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        
+        }
+
+      
+>>>>>>> 3736a204a6bdf99d1796e7648a8a1c4d6305932b
         document.getElementById('formulario').addEventListener(
             'submit', stopDefAction, false
         );
@@ -498,9 +698,15 @@
 
         function createButton(lastID) {
             const form = document.querySelector('form');
+<<<<<<< HEAD
 
           const buttonToCurriculum = document.getElementById('buttonToCurriculum');
 
+=======
+
+          const buttonToCurriculum = document.getElementById('buttonToCurriculum');
+
+>>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
           if (buttonToCurriculum) {
             buttonToCurriculum.remove()
           }

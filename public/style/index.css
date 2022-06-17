@@ -3,8 +3,12 @@
     font-family: 'Urbanist', sans-serif;
 
 }
+<<<<<<< HEAD
 
 /*header{
+=======
+header{
+>>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
     position: fixed;
     width: 100%;
     background-color:#40798c;
@@ -18,6 +22,7 @@ h1{
 
 body {
     margin-top: 48px;
+<<<<<<< HEAD
 }*/
 
 .navbar{
@@ -34,4 +39,6 @@ body {
 
 .nav-link.active{
     color: white !important;
+=======
+>>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
 }
