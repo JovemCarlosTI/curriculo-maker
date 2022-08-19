@@ -16,7 +16,7 @@
 </head>
 
 
-<body onload="verifyAuth()">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <a class="navbar-brand" href="/">Currículo Maker</a>
@@ -36,7 +36,14 @@
         </div>
       </nav>
    
-    <section class="mx-auto mb-5" style="margin: 121px 48px 0; max-width: 70% !important;">
+    <section class="mx-auto mb-5" style="margin: 16px 48px 0; max-width: 70% !important;">
+			<div class="alert alert-secondary" role="alert" id="alert">
+				<span class="material-symbols-outlined" style="padding-right: 12px">
+info
+</span>
+  			É preciso estar logado para criar seu currículo, jovem!
+			</div>
+			<div class="alert alert-secondary" role="alert">
         <form id="signin">
             <h2 class="fs-1 black fw-semibold text-center">Login</h1>
             <hr>
@@ -52,7 +59,9 @@
               </div>
               <button type="submit" class="btn btn-primary" onclick="authUser()">Logar</button>
         </form>
+</div>
 
+			<div class="alert alert-secondary" role="alert">
         <form id="signup">
             <h2 class="fs-1 black fw-semibold text-center">Criar Conta</h1>
             <hr>
@@ -70,13 +79,25 @@
                 <label for="exampleInputPassword1" class="form-label">Confirmar senha</label>
                 <input type="password" class="form-control" id="conf-senha">
               </div>
-              <button type="submit" class="btn btn-primary" onclick="createUser()">Criar conta</button>
-        </form>
+              <button type="submit" class="btn btn-primary">Criar conta</button>
+</form>
+</div>
+
+
+
     </section>
 
     <footer></footer>
-    <script src="src/menu.js"></script>
-    <script>
+    <script type="module">
+			document.getElementById('signup').onsubmit = createUser
+			document.getElementById('signin').onsubmit = authUser
+			
+
+      //  import Auth from './src/auth.js'
+			import Menu from './src/menu.js'
+			
+			document.body.onload = Menu.verifyAuth;
+      
         document.getElementById('signin').addEventListener(
             'submit', stopDefAction, false
         );
@@ -100,6 +121,8 @@
           "login": emailInput,
           "senha": senhaInput
         }
+
+					console.log(newUser)
 
           const url = '/create-user';
 

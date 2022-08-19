@@ -13,6 +13,7 @@ async function getCurriculo(id) {
   curriculo.tel AS telefone,
   curriculo.linkedin,
   curriculo.github,
+	curriculo.usuario_id AS usuario_id,
   endereco.pais,
   endereco.estado,
   endereco.cidade,
@@ -36,7 +37,7 @@ async function getCurriculo(id) {
 FROM
   curriculo, endereco, area_atuacao, especializacao, instituicao, formacao,
   cur_extras, empresa, experiencia_profissional, experiencia_empresa,
-  curriculo_experiencia
+  curriculo_experiencia, usuario
 WHERE
   curriculo.id = ?
   AND curriculo.endereco_id = endereco.id
@@ -50,6 +51,7 @@ WHERE
   AND experiencia_profissional.id = experiencia_empresa.experiencia_profissional_id
   AND curriculo.id = curriculo_experiencia.curriculo_id
   AND experiencia_profissional.id = curriculo_experiencia.experiencia_profissional_id
+	AND usuario.id = curriculo.usuario_id
 ;
   `;
 
@@ -114,12 +116,10 @@ async function setCurriculo(tempCurriculo) {
       github, pais, estado, cidade, nomeArea, nomeEspecializacao, nomeInstituicao,
       nomeEmpresa, cargoExp, periodoExp, descricaoExp, atividades_complementares, nivelFormacao,
       nomeFormacao, periodoFormacao, 
-      duracaoFormacao, nomeCur, duracaoCur, tipoCur, habilidades}
+      duracaoFormacao, nomeCur, duracaoCur, tipoCur, habilidades, usuario_id}
       = tempCurriculo;
 
     // Usuário
-    // Atualizar pra usuario_id no futuro
-    const usuario_id = 1;
 
     // Endereço
     const enderecoSQL = `

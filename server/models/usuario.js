@@ -1,9 +1,17 @@
+import bcrypt from 'bcryptjs';
+
 import Database from '../database/database.js';
+
+const salt = Number(process.env.SALT);
 
 async function create(tempUsuario) {
     const db = await Database.connect();
+
+		console.log(tempUsuario, 'se aparecer isso funciona')
     
     const {login, senha} = tempUsuario;
+
+		const hash = bcrypt.hashSync(senha, salt);
 
     if (await verifyEmail(login)) {
       const usuarioSQL = `
@@ -13,7 +21,7 @@ async function create(tempUsuario) {
           (?, ?)
         `;
 
-      let {lastID} = await db.run(usuarioSQL, [login, senha]);
+      let {lastID} = await db.run(usuarioSQL, [login, hash]);
       
       return lastID;
     } else return false;
@@ -79,9 +87,20 @@ async function auth(login, senha) {
 
   const user = await db.get(verifyAuthSQL, [login]);
 
-  if(user && user.login === login && user.senha === senha) {
-    return user.id;
-  } else return false;
+	const { id: id, senha: hash } = user;
+
+	const match = await bcrypt.compareSync(senha, hash);
+
+
+  if(user && user.login === login && match) {
+      const token = jwt.sign(
+        { id },
+        process.env.SECRET,
+        { expiresIn: 3600 } // 1h
+      );
+
+      res.json({ auth: true, token });
+  } else throw new Error('User not found');
 }
 
 

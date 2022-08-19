@@ -141,21 +141,21 @@ async function up() {
           )`;
 
   
-  db.run(createArea_atuacao);
-  db.run(createEspecializacao);
-  db.run(createEndereco);
-  db.run(createUsuario);
-  db.run(createCurriculo);
-  db.run(createInstituicao);
-  db.run(createFormacao);
-  db.run(createCur_extras);
-  db.run(createEmpresa);
-  db.run(createExpProf);
-  db.run(createExperiencia_Empresa);
-  db.run(createCurriculo_Experiencia);
-  db.run(createAtivComp);
-  db.run(createHabilidades);
-  db.run(createCurriculo_Habilidades);
+  await db.run(createArea_atuacao);
+  await db.run(createEspecializacao);
+  await db.run(createEndereco);
+  await db.run(createUsuario);
+  await db.run(createCurriculo);
+  await db.run(createInstituicao);
+  await db.run(createFormacao);
+  await db.run(createCur_extras);
+  await db.run(createEmpresa);
+  await db.run(createExpProf);
+  await db.run(createExperiencia_Empresa);
+  await db.run(createCurriculo_Experiencia);
+  await db.run(createAtivComp);
+  await db.run(createHabilidades);
+  await db.run(createCurriculo_Habilidades);
 
 }
 

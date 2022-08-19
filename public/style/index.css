@@ -3,9 +3,9 @@
     font-family: 'Urbanist', sans-serif;
 
 }
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 
-/*header{
+header{
 =======
 header{
 >>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
@@ -30,6 +30,11 @@ body {
 
 }
 
+.navbar-collapse {
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .navbar-brand{
     color: white !important;
 }
@@ -39,6 +44,19 @@ body {
 
 .nav-link.active{
     color: white !important;
-=======
->>>>>>> 85ab8afcdd0955616f539993522235dd149ed820
+
+}
+
+#logout {
+	cursor: pointer;
+}
+
+#alert {
+	display: flex;
+	margin: 24px 0;
+}
+
+.alert-secondary {
+	border: 2px dotted #d3d6d8;
+	background-color: white;
 }
