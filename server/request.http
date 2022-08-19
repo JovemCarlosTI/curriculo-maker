@@ -1,6 +1,10 @@
+@token = {{login.response.body.token}}
+@host = http://localhost:8080
+
 ### Post Create Curriculum
-POST http://localhost:8080/curriculum
+POST {{host}}/curriculum
 Content-Type: application/json
+Authorization: bearer {{token}}
 
 {
   "nome": "Carlos",
@@ -8,8 +12,68 @@ Content-Type: application/json
   "tel": "4002-8922",
   "email": "carlosandre116@gmail.com",
   "linkedin": "@jovemcarlosti",
-  "github": "jovemcarlosti"
+  "github": "jovemcarlosti",
+  "pais": "Brasil",
+  "estado": "Paraíba",
+  "cidade": "João Pessoa",
+  "nomeArea": "Informática Sofredora",
+  "nomeEspecializacao":"Inglês", 
+  "nomeInstituicao":"IFPB",
+  "nomeEmpresa":"Tectudo", 
+  "cargoExp": "Suporte Técnico", 
+  "periodoExp": "13/10/2021 - 17/03/2022", 
+  "decricaoExp": "Jovem Aprendiz", 
+  "atividades_complementares": [
+    {"nome": "Curso de Inglês",
+    "duracao": "5 anos",
+    "tipo": "Idioma",
+    "atual": "não"}],
+  "nivelFormacao": "Técnico",
+  "nomeFormacao": "Informática",
+  "periodoFormacao": "2015-2018", 
+  "duracaoFormacao": "3 anos", 
+  "nomeCur": "Informática", 
+  "duracaoCur": "3 anos", 
+  "tipoCur": "Graduação",
+  "habilidades": [
+    {"nome": "HTML",
+    "nivel": "Básico"},
+    {"nome": "CSS",
+    "nivel": "Básico"}
+  ]
 }
 
 ### Read All
-GET http://localhost:8080/curriculum-infos
+GET {{host}}/curriculum-infos
+Authorization: bearer {{token}}
+
+### Read Specific Curriculum
+GET {{host}}/curriculum-info/id/5
+Authorization: bearer {{token}}
+
+### Post Create User
+POST {{host}}/create-user
+Content-Type: application/json
+
+{
+  "login": "ja@gmail.com",
+  "senha": "cavalo"
+}
+
+### Read All
+GET {{host}}/usuarios-infos
+Authorization: bearer {{token}}
+
+### Read Specific User
+GET {{host}}/usuario-info/id/1
+Authorization: bearer {{token}}
+
+### Auth User
+# @name login
+POST {{host}}/auth-user
+Content-Type: application/json
+
+{
+  "login": "teste@gmail.com",
+  "senha": "cavalo"
+}
