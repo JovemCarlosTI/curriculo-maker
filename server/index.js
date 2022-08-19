@@ -16,12 +16,11 @@ import router from './routes.js';
 const doc = new jsPDF();
 
 const app = express();
-
-app.use('/', router);
-app.use('/', express.static('public'));
 app.use(express.json())
-
 app.use(morgan('tiny'));
+
+app.use('/', express.static('public'));
+app.use('/', router);
 
 app.listen(8080, () => {
   console.log("Servidor rodando em http://localhost:8080")

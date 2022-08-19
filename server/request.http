@@ -1,6 +1,10 @@
+@token = {{login.response.body.token}}
+@host = http://localhost:8080
+
 ### Post Create Curriculum
-POST http://localhost:8080/curriculum
+POST {{host}}/curriculum
 Content-Type: application/json
+Authorization: bearer {{token}}
 
 {
   "nome": "Carlos",
@@ -40,13 +44,15 @@ Content-Type: application/json
 }
 
 ### Read All
-GET http://localhost:8080/curriculum-infos
+GET {{host}}/curriculum-infos
+Authorization: bearer {{token}}
 
 ### Read Specific Curriculum
-GET http://localhost:8080/curriculum-info/id/5
+GET {{host}}/curriculum-info/id/5
+Authorization: bearer {{token}}
 
 ### Post Create User
-POST http://localhost:8080/create-user
+POST {{host}}/create-user
 Content-Type: application/json
 
 {
@@ -55,13 +61,16 @@ Content-Type: application/json
 }
 
 ### Read All
-GET http://localhost:8080/usuarios-infos
+GET {{host}}/usuarios-infos
+Authorization: bearer {{token}}
 
 ### Read Specific User
-GET http://localhost:8080/usuario-info/id/1
+GET {{host}}/usuario-info/id/1
+Authorization: bearer {{token}}
 
 ### Auth User
-POST http://localhost:8080/auth-user
+# @name login
+POST {{host}}/auth-user
 Content-Type: application/json
 
 {
