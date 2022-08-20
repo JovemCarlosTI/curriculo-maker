@@ -4,6 +4,7 @@ window.signout = Auth.signout;
 
 function startIndex() {
 	console.log("É isso")
+	Auth.isAuthenticated()
 	verifyAuth()	
 }
 
