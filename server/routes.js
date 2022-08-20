@@ -51,9 +51,9 @@ router.get('/pdf', (req, res) => {
 });
 
 router.post('/create-user', async (req, res) => {
-  const lastID = await user.create(req.body);
+  const newUser = await user.create(req.body);
 
-  res.send({"id": `${lastID}`});
+  res.send(newUser);
 });
 
 router.get('/usuarios-infos', isAuthenticated, async (req, res) => {

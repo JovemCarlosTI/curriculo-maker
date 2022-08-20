@@ -23,7 +23,7 @@ async function create(tempUsuario) {
 
       let {lastID} = await db.run(usuarioSQL, [login, hash]);
       
-      return lastID;
+      return readById(lastID);
     } else return false;
 }
 
