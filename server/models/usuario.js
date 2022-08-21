@@ -1,4 +1,7 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config'
+
 
 import Database from '../database/database.js';
 
@@ -6,8 +9,6 @@ const salt = Number(process.env.SALT);
 
 async function create(tempUsuario) {
     const db = await Database.connect();
-
-		console.log(tempUsuario, 'se aparecer isso funciona')
     
     const {login, senha} = tempUsuario;
 
@@ -74,33 +75,38 @@ async function readById(id) {
 }
 
 async function auth(login, senha) {
-  const db = await Database.connect();
+  try {
+    const db = await Database.connect();
   
-  const verifyAuthSQL = `
-    SELECT
-      *
-    FROM
-      usuario
-    WHERE
-      login = ?
-  `
-
-  const user = await db.get(verifyAuthSQL, [login]);
-
-	const { id: id, senha: hash } = user;
-
-	const match = await bcrypt.compareSync(senha, hash);
-
-
-  if(user && user.login === login && match) {
+    const verifyAuthSQL = `
+      SELECT
+        *
+      FROM
+        usuario
+      WHERE
+        login = ?
+    `
+  
+    const user = await db.get(verifyAuthSQL, [login]);
+  
+    const { id: id, senha: hash } = user;
+  
+    const match = await bcrypt.compareSync(senha, hash);
+  
+  
+    if(user && match) {
       const token = jwt.sign(
         { id },
         process.env.SECRET,
         { expiresIn: 3600 } // 1h
       );
-
-      res.json({ auth: true, token });
-  } else throw new Error('User not found');
+  
+      console.log(token)
+  
+      return { auth: true, token }
+  }} catch(err) {
+    throw new Error('User not found');
+  }
 }
 
 

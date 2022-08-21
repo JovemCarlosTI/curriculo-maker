@@ -1,4 +1,5 @@
 import { Router } from "express";
+import 'dotenv/config'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
@@ -74,9 +75,9 @@ router.post('/auth-user', async (req, res) => {
 	try {
 		const { login, senha } = req.body;
 	
-	  const lastID = await user.auth(login, senha);
+	  const token = await user.auth(login, senha);
 	
-	  res.send({"id": `${lastID}`});
+	  res.json(token);
 	} catch(error) {
 		res.status(401).json({ error: 'User not found' });
 	}})
