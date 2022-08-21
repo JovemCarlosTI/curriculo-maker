@@ -48,7 +48,7 @@ GET {{host}}/curriculum-infos
 Authorization: bearer {{token}}
 
 ### Read Specific Curriculum
-GET {{host}}/curriculum-info/id/5
+GET {{host}}/curriculum-info/id/1
 Authorization: bearer {{token}}
 
 ### Post Create User
