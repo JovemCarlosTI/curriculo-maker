@@ -14,7 +14,7 @@ function getToken() {
 function signin(token) {
   localStorage.setItem('@foodApp:token', token);
 
-  window.location.href = '/foods.html';
+  window.location.href = '/';
 }
 
 function signout() {

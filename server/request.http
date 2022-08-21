@@ -56,7 +56,7 @@ POST {{host}}/create-user
 Content-Type: application/json
 
 {
-  "login": "ja@gmail.com",
+  "login": "je@gmail.com",
   "senha": "cavalo"
 }
 
@@ -74,6 +74,6 @@ POST {{host}}/auth-user
 Content-Type: application/json
 
 {
-  "login": "teste@gmail.com",
+  "login": "je@gmail.com",
   "senha": "cavalo"
 }

@@ -24,5 +24,6 @@ app.use('/', router);
 
 app.listen(8080, () => {
   console.log("Servidor rodando em http://localhost:8080")
+  console.log(process.env.SALT)
 });
 

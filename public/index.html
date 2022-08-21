@@ -456,6 +456,7 @@
             await fetch("/curriculum", {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${Auth.getToken()}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(curriculo),
