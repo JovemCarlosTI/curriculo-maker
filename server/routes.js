@@ -19,12 +19,12 @@ const router = Router();
 import { isAuthenticated } from "./middleware/auth.js";
 
 router.post('/curriculum', isAuthenticated, async (req, res) => {
-  const lastID = await curriculo.setCurriculo(req.body)
+  const lastID = await curriculo.setCurriculo(req.body, req.userId)
   
   res.send({"id": `${lastID}`});
 });
 
-router.get('/curriculum', isAuthenticated, (req, res) => {
+router.get('/curriculum', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public/curriculum-layout.html'));
 });
 

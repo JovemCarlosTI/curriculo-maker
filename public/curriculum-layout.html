@@ -260,7 +260,7 @@
     let atividadesToPrint = printAtividades();
 
     const view = `<body class="">
-<button onclick="toPrintPage()" id="print" class="btn btn-primary"><span class="material-icons">print</span></button>
+<button id="print" class="btn btn-primary"><span class="material-icons">print</span></button>
 
 
     <main class="px-5">
@@ -432,6 +432,7 @@
         const body = document.getElementById('body');
 
         body.innerHTML = view;
+        document.getElementById('print').onclick = toPrintPage;
 }
 
     function toPrintPage() {
@@ -442,10 +443,11 @@
 
       const body = document.querySelector('body')
 
-      const view = `<button onclick="toPrintPage()" id="print" class="btn btn-primary"><span class="material-icons">print</span></button>`
+      const view = `<button id="print" class="btn btn-primary"><span class="material-icons">print</span></button>`
 
       body.insertAdjacentHTML('afterbegin', view);
       
+      document.getElementById('print').onclick = toPrintPage;
     }
 
     </script>

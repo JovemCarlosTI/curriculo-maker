@@ -12,7 +12,7 @@ function verifyAuth() {
     const sign = document.getElementById('navbarSupportedContent')
     let response = `<a class="nav-link active" aria-current="page" href="/index.html">Home</a>`
     if((Auth.getToken())) {
-			response +=  `
+			response +=  `<a class="nav-link" aria-current="page" href="#">Meus cúrriculos (nao funciona ainda)</a>
                 <p class="saudacao" class="navbar-brand" style="
     margin-bottom: 0;
 padding: 16px; color: white;">Olá!</p>
@@ -28,15 +28,5 @@ padding: 16px; color: white;">Olá!</p>
 
 		sign.innerHTML = response;
 }
-
-// não tava funcionando entao eu tirei e mudei diretamente pro signout
-// function logout() {
-// 	  Auth.signout()
-// }
-
-// function userIsAuth() {
-// 	if (window.sessionStorage.getItem('user_id') && typeof window.sessionStorage.getItem('user_id') != 'undefined') return true;
-// 	else return false;
-// }
 
 export default { startIndex, verifyAuth }; //logout

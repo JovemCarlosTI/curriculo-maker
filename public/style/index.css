@@ -44,6 +44,10 @@ body {
     color: rgb(228, 228, 228) !important;
 }
 
+.nav-link:hover{
+    color: #f4f7f8 !important;
+}
+
 .nav-link.active, .active{
     color: white !important;
     font-weight: 600;
