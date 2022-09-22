@@ -9,6 +9,8 @@ import user from './models/usuario.js';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
+import SendMail from './services/SendMail.js'
+
 const __filename = fileURLToPath(import.meta.url);
 
 // 👇️ "/home/john/Desktop/javascript"
@@ -19,12 +21,12 @@ const router = Router();
 import { isAuthenticated } from "./middleware/auth.js";
 
 router.post('/curriculum', isAuthenticated, async (req, res) => {
-  const lastID = await curriculo.setCurriculo(req.body)
+  const lastID = await curriculo.setCurriculo(req.body, req.userId)
   
   res.send({"id": `${lastID}`});
 });
 
-router.get('/curriculum', isAuthenticated, (req, res) => {
+router.get('/curriculum', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public/curriculum-layout.html'));
 });
 
@@ -54,6 +56,8 @@ router.get('/pdf', (req, res) => {
 router.post('/create-user', async (req, res) => {
   const newUser = await user.create(req.body);
 
+  await SendMail.createNewUser(req.body.login);
+
   res.send(newUser);
 });
 
@@ -81,6 +85,15 @@ router.post('/auth-user', async (req, res) => {
 	} catch(error) {
 		res.status(401).json({ error: 'User not found' });
 	}})
+
+  router.post('/send-curriculum', async (req, res) => {
+    try {
+      const {to, htmlContent} = req.body
+      await SendMail.sendNewCurriculum(to, htmlContent);
+    } catch (error) {
+      res.status(401).json({ error: 'Error in send email' });
+    }
+  })
 
 export default router;
 

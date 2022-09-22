@@ -109,14 +109,14 @@ async function readAll() {
     return curriculo;
 }
 
-async function setCurriculo(tempCurriculo) {
+async function setCurriculo(tempCurriculo, usuario_id) {
     const db = await Database.connect();
     
     const {nome, idade, tel, email, linkedin,
       github, pais, estado, cidade, nomeArea, nomeEspecializacao, nomeInstituicao,
       nomeEmpresa, cargoExp, periodoExp, descricaoExp, atividades_complementares, nivelFormacao,
       nomeFormacao, periodoFormacao, 
-      duracaoFormacao, nomeCur, duracaoCur, tipoCur, habilidades, usuario_id}
+      duracaoFormacao, nomeCur, duracaoCur, tipoCur, habilidades}
       = tempCurriculo;
 
     // Usuário

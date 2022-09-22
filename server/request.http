@@ -22,7 +22,7 @@ Authorization: bearer {{token}}
   "nomeEmpresa":"Tectudo", 
   "cargoExp": "Suporte Técnico", 
   "periodoExp": "13/10/2021 - 17/03/2022", 
-  "decricaoExp": "Jovem Aprendiz", 
+  "descricaoExp": "Jovem Aprendiz", 
   "atividades_complementares": [
     {"nome": "Curso de Inglês",
     "duracao": "5 anos",
@@ -48,7 +48,7 @@ GET {{host}}/curriculum-infos
 Authorization: bearer {{token}}
 
 ### Read Specific Curriculum
-GET {{host}}/curriculum-info/id/5
+GET {{host}}/curriculum-info/id/1
 Authorization: bearer {{token}}
 
 ### Post Create User
