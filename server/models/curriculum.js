@@ -323,8 +323,10 @@ async function setCurriculo(tempCurriculo, usuario_id) {
   
         lastIDCurriculo_Habilidades.push(lastID.lastID);
       }
+
+      const retorno = {lastIDCurriculo, usuario_id};
       
-      return lastIDCurriculo;
+      return retorno;
 }
 
 export default {getCurriculo, setCurriculo, readAll};

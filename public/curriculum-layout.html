@@ -172,7 +172,7 @@
     </section>
     </main>
     
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="module">
 
     import Auth from './src/auth.js';
@@ -180,7 +180,8 @@
     document.body.onload = renderInfos;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    const id = urlParams.get('id'); // id do curriculo
+    let userId; // id do usuario que criou o curriculo
 
       async function renderInfos() {
 
@@ -194,6 +195,9 @@
         const url = `/curriculum-info/id/${id}`;
 
         const tempCurriculo = await (await fetch(url, config)).json();
+
+        userId = tempCurriculo.curriculo.usuario_id; //pega o id de usuario para enviar o curriculo por email
+        //console.log(userId);
 
         let curriculo = {
                 nome: tempCurriculo.curriculo.nome_completo,
@@ -458,29 +462,50 @@
       document.getElementById('outgoing_mail').onclick = toSendEmail;
     }
 
+    async function getMail() {
+        const url = `/usuario-info/id/${userId}`;
+        const config = {
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`,
+        },
+      };
+        const userData = await (await fetch(url, config)).json();
+        console.log(userData);
+
+        const email = userData.login;
+        console.log(email);
+
+        return email;
+    };
+
     async function toSendEmail() {
       const print = document.getElementById('print')
       print.remove()
 
       const outgoing_mail = document.getElementById('outgoing_mail')
-      outgoing_mail.remove()
+      outgoing_mail.remove();
+
+      const email = await getMail();
+      //console.log(email);
 
       // Falta coletar email para enviar como to
       const emailContent = {
-        to: "email@email.com",
+        to: email,
         htmlContent: document.documentElement.innerHTML
       }
 
       await fetch("/send-curriculum", {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${Auth.getToken()}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(emailContent),
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    lastID = data.id;
+                    // lastID = data.id;
                     console.log("Success:", data);
                 })
                 .catch((error) => {

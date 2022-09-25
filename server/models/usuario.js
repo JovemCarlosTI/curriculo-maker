@@ -103,7 +103,7 @@ async function auth(login, senha) {
   
       console.log(token)
   
-      return { auth: true, token }
+      return { auth: true, token } 
   }} catch(err) {
     throw new Error('User not found');
   }

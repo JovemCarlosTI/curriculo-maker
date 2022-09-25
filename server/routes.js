@@ -21,7 +21,10 @@ const router = Router();
 import { isAuthenticated } from "./middleware/auth.js";
 
 router.post('/curriculum', isAuthenticated, async (req, res) => {
-  const lastID = await curriculo.setCurriculo(req.body, req.userId)
+  const retorno = await curriculo.setCurriculo(req.body, req.userId)
+
+  const lastID = retorno.lastIDCurriculo;
+
   
   res.send({"id": `${lastID}`});
 });
@@ -86,9 +89,10 @@ router.post('/auth-user', async (req, res) => {
 		res.status(401).json({ error: 'User not found' });
 	}})
 
-  router.post('/send-curriculum', async (req, res) => {
+  router.post('/send-curriculum', isAuthenticated, async (req, res) => {
     try {
-      const {to, htmlContent} = req.body
+      const {to, htmlContent} = req.body;
+      //console.log(req.body.to)
       await SendMail.sendNewCurriculum(to, htmlContent);
     } catch (error) {
       res.status(401).json({ error: 'Error in send email' });
