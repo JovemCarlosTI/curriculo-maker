@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import 'dotenv/config';
 
 async function mailConfig() {
   const config = {
