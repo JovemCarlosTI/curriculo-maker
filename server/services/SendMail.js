@@ -17,7 +17,7 @@ async function createNewUser(to) {
       from: 'noreplay@email.com',
       to,
       subject: 'Conta criada no Currículo Maker',
-      text: `Conta criada com sucesso.\n\nAcesse o aplicativo para gerenciar o cadastro de currículos.`,
+      text: `Conta criada com sucesso.\n\nAcesse o aplicativo para gerenciar seus currículos.`,
       html: `${htmlContent}`,
     });
 
