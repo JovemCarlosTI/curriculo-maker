@@ -19,3 +19,6 @@ O projeto conterá um formulário com as informações necessárias para um curr
      ou
 > npm start
 ```
+
+? Problemas? Se estiver no Windows, altere o script dev para ter um "&" após "NODE_ENV=development"
+Se estiver no linux, esse mesmo "&" não deve existir
