@@ -11,13 +11,13 @@ async function createNewUser(to) {
 		const htmlContent = fs.readFileSync('server/models/emails/newUser.html',
             {encoding:'utf8'});
 
-		console.log(htmlContent)
+    console.log(htmlContent)
 
     const info = await transporter.sendMail({
       from: 'noreplay@email.com',
       to,
       subject: 'Conta criada no Currículo Maker',
-      text: `Conta criada com sucesso.\n\nAcesse o aplicativo para gerenciar o cadastro de comidas.`,
+      text: `Conta criada com sucesso.\n\nAcesse o aplicativo para gerenciar o cadastro de currículos.`,
       html: `${htmlContent}`,
     });
 
@@ -32,8 +32,6 @@ async function sendNewCurriculum(to, htmlContent) {
     const config = await mailConfig();
 
     const transporter = nodemailer.createTransport(config);
-
-		console.log(htmlContent)
 
     const info = await transporter.sendMail({
       from: 'noreplay@email.com',

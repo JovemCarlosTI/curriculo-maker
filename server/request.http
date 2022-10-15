@@ -48,17 +48,27 @@ GET {{host}}/curriculum-infos
 Authorization: bearer {{token}}
 
 ### Read Specific Curriculum
-GET {{host}}/curriculum-info/id/1
+GET {{host}}/curriculum-info/id/18
 Authorization: bearer {{token}}
 
 ### Post Create User
 POST {{host}}/create-user
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary="boundary"
 
-{
-  "login": "je@gmail.com",
-  "senha": "cavalo"
-}
+--boundary
+Content-Disposition: form-data; name="image"; filename="milkshake.jpg"
+Content-Type: image/jpeg
+
+< ./public/imgs/foods/milkshake.jpg
+--boundary
+Content-Disposition: form-data; name="login"
+
+email2@gmail.com
+--boundary
+Content-Disposition: form-data; name="senha"
+
+123
+--boundary--
 
 ### Read All
 GET {{host}}/usuarios-infos
@@ -74,6 +84,10 @@ POST {{host}}/auth-user
 Content-Type: application/json
 
 {
-  "login": "je@gmail.com",
-  "senha": "cavalo"
+  "login": "testefront@email.com",
+  "senha": "123"
 }
+
+### Get image
+GET {{host}}/get-image-user
+Authorization: bearer {{token}}

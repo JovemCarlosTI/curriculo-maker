@@ -2,7 +2,9 @@ import { Router } from "express";
 import 'dotenv/config'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import multer from 'multer';
 
+import uploadConfig from './config/multer.js';
 import curriculo from './models/curriculum.js';
 import user from './models/usuario.js';
 
@@ -56,11 +58,18 @@ router.get('/pdf', (req, res) => {
   res.send(doc);
 });
 
-router.post('/create-user', async (req, res) => {
-  const newUser = await user.create(req.body);
+router.post('/create-user',  
+multer(uploadConfig).single('image'),
+async (req, res) => {
 
+  const image = req.file
+        ? `/imgs/foods/${req.file.filename}`
+        : '/imgs/foods/placeholder.jpg';
+
+  console.log(req.body.login)
   await SendMail.createNewUser(req.body.login);
-
+  //espero que funcione
+  const newUser = await user.create({...req.body, image});
   res.send(newUser);
 });
 
@@ -97,6 +106,21 @@ router.post('/auth-user', async (req, res) => {
     } catch (error) {
       res.status(401).json({ error: 'Error in send email' });
     }
+  })
+
+  router.get('/get-image-user', isAuthenticated, async (req, res) => {
+    try {
+      const defaultImg = 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Download-Free-PNG.png'
+
+      const response = await user.getImage(req.userId);
+
+      // Se response estiver sem imagem, substitui por padrão antes
+      if (!(response) || response == "") response = defaultImg; 
+      res.json(response);
+    } catch (error) {
+		  res.status(401).json({ error: 'User not found' });
+    }
+
   })
 
 export default router;

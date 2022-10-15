@@ -39,6 +39,7 @@ body {
 
 .navbar-brand{
     color: white !important;
+    font-size: 28px;
 }
 .nav-link{
     color: rgb(228, 228, 228) !important;
@@ -81,4 +82,15 @@ input:focus{
     border: #5A9DB3 solid 1px !important;
     box-shadow: none !important;
     background-color: #5A9DB316 !important;
+}
+
+div.container {
+    max-width: 2048px;
+}
+
+.foto-perfil {
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 48px;
+    margin: 0 20px;
 }

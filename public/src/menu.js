@@ -8,14 +8,25 @@ function startIndex() {
 	verifyAuth()	
 }
 
-function verifyAuth() {
+async function verifyAuth() {
+  const url = `/get-image-user`;
+  const config = {
+  method: 'get',
+  headers: {
+    Authorization: `Bearer ${Auth.getToken()}`,
+  },
+};
+  const user_img = await (await fetch(url, config)).json();
+
     const sign = document.getElementById('navbarSupportedContent')
-    let response = `<a class="nav-link active" aria-current="page" href="/index.html">Home</a>`
+    let response = `<a class="nav-link active" id="home-link" aria-current="page" href="/index.html">Home</a>`
     if((Auth.getToken())) {
-			response +=  `<a class="nav-link" aria-current="page" href="#">Meus cúrriculos (nao funciona ainda)</a>
-                <p class="saudacao" class="navbar-brand" style="
+      /*
+      <p class="saudacao" class="navbar-brand" style="
     margin-bottom: 0;
-padding: 16px; color: white;">Olá!</p>
+padding: 16px; color: white;">Olá!</p>*/
+			response +=  `
+<img class="foto-perfil" class="navbar-brand" src="${user_img.image}">
                 <span class="material-symbols-outlined logout navbar-brand"
                   onclick="signout()" id="logout" alt="Sair">
   logout

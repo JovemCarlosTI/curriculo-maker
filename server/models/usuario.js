@@ -10,19 +10,21 @@ const salt = Number(process.env.SALT);
 async function create(tempUsuario) {
     const db = await Database.connect();
     
-    const {login, senha} = tempUsuario;
+    const {image, login, senha} = tempUsuario;
+
+    console.log({image, login, senha})
 
 		const hash = bcrypt.hashSync(senha, salt);
 
     if (await verifyEmail(login)) {
       const usuarioSQL = `
         INSERT INTO
-          usuario (login, senha)
+          usuario (image, login, senha)
         VALUES
-          (?, ?)
+          (?, ?, ?)
         `;
 
-      let {lastID} = await db.run(usuarioSQL, [login, hash]);
+      let {lastID} = await db.run(usuarioSQL, [image, login, hash]);
       
       return readById(lastID);
     } else return false;
@@ -109,5 +111,19 @@ async function auth(login, senha) {
   }
 }
 
+async function getImage(id) {
+  const db = await Database.connect();
 
-export default {create, readAll, readById, auth};
+  const getImageById = `
+    SELECT
+      image
+    FROM
+      usuario
+    WHERE
+     id = ?
+  `;
+
+  return (await db.get(getImageById, [id]));
+}
+
+export default {create, readAll, readById, auth, getImage};

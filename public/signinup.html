@@ -67,17 +67,21 @@
             <hr>
             <h3 class="fs-5 text-center">Insira os seus dados para criar uma conta!</h3>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Login</label>
-                <input type="email" class="form-control" id="login" aria-describedby="emailHelp">
+                <label for="login" class="form-label">Login</label>
+                <input type="email" class="form-control" id="login" name="login" aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">Não iremos compartilhar o seu e-mail com ninguém! (confia)</div>
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha">
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Confirmar senha</label>
-                <input type="password" class="form-control" id="conf-senha">
+                <label for="conf-senha" class="form-label">Confirmar senha</label>
+                <input type="password" class="form-control" id="conf-senha" name="conf-senha">
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Imagem de Perfil</label>
+                <input type="file" class="form-control" id="image" name="image">
               </div>
               <button type="submit" class="btn btn-primary">Criar conta</button>
 </form>
@@ -89,7 +93,40 @@
 
     <footer></footer>
     <script type="module">
-			document.getElementById('signup').onsubmit = createUser
+			document.getElementById('signup').onsubmit = async (event) => {
+        event.preventDefault();
+        // const emailInput = document.getElementById('login').value
+        const senhaInput = document.getElementById('senha').value
+        const senhaConf = document.getElementById('conf-senha').value
+        // const image = document.getElementById('image').value
+
+        if (senhaInput === senhaConf) {
+        // const newUser = {
+        //   "login": emailInput,
+        //   "senha": senhaInput,
+        //   "image": image
+        // }
+
+        const form = document.getElementById('signup');
+        const newUser = new FormData(form);
+
+          const url = '/create-user';
+
+          await fetch(url, {
+            method: "POST",
+            body: newUser,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Success:", data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+
+            
+        }
+      }
 			document.getElementById('signin').onsubmit = authUser
 			
 
@@ -111,42 +148,7 @@
         }
 
         // Coleta e envia as infos para registrar
-      async function createUser() {
-        const emailInput = document.getElementById('login').value
-        const senhaInput = document.getElementById('senha').value
-        const senhaConf = document.getElementById('conf-senha').value
 
-        if (senhaInput === senhaConf) {
-        const newUser = {
-          "login": emailInput,
-          "senha": senhaInput
-        }
-
-					console.log(newUser)
-
-          const url = '/create-user';
-
-          await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Success:", data);
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-
-            
-        }
-
-        
-        
-        }
 
       async function authUser() {
         const emailInput = document.getElementById('login-auth').value

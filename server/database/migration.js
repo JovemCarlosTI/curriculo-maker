@@ -28,6 +28,7 @@ async function up() {
     const createUsuario = `
       CREATE TABLE usuario (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
+          image VARCHAR(50) NOT NULL,
           login VARCHAR(25) NOT NULL,
           senha VARCHAR(25) NOT NULL
       )`;
