@@ -65,12 +65,16 @@ async (req, res) => {
   const image = req.file
         ? `/imgs/foods/${req.file.filename}`
         : '/imgs/foods/placeholder.jpg';
-
-  console.log(req.body.login)
-  await SendMail.createNewUser(req.body.login);
+  try {
+    await SendMail.createNewUser(req.body.login);
+  } catch(err) {
+    console.err("Erro ao enviar e-mail:" + err)
+  } finally {
   //espero que funcione
   const newUser = await user.create({...req.body, image});
   res.send(newUser);
+  }
+
 });
 
 router.get('/usuarios-infos', isAuthenticated, async (req, res) => {

@@ -19,8 +19,6 @@ async function mailConfig() {
       pass: testAccount.pass,
     };
   }
-
-  console.log(config)
   return config;
 }
 
