@@ -68,7 +68,7 @@ async (req, res) => {
   try {
     await SendMail.createNewUser(req.body.login);
   } catch(err) {
-    console.err("Erro ao enviar e-mail:" + err)
+    console.error("Erro ao enviar e-mail:" + err)
   } finally {
   //espero que funcione
   const newUser = await user.create({...req.body, image});
