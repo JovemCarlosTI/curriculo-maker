@@ -3,6 +3,7 @@ import 'dotenv/config'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import multer from 'multer';
+import { celebrate, Joi, errors, Segments } from 'celebrate';
 
 import uploadConfig from './config/multer.js';
 import curriculo from './models/curriculum.js';
@@ -59,7 +60,13 @@ router.get('/pdf', (req, res) => {
 });
 
 router.post('/create-user',  
-multer(uploadConfig).single('image'),
+multer(uploadConfig).single('image'),  celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    login: Joi.string().email(),
+    senha: Joi.string().min(8),
+    confirmation_password: Joi.string().min(8)
+  }),
+}),
 async (req, res) => {
 
   const image = req.file
@@ -126,6 +133,8 @@ router.post('/auth-user', async (req, res) => {
     }
 
   })
+
+  router.use(errors());
 
 export default router;
 
