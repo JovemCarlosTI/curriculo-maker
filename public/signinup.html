@@ -44,46 +44,77 @@
   			É preciso estar logado para criar seu currículo, jovem!
 			</div>
 			<div class="alert alert-secondary" role="alert">
-        <form id="signin">
+        <form id="signin needs-validation" novalidate>
             <h2 class="fs-1 black fw-semibold text-center">Login</h1>
             <hr>
             <h3 class="fs-5 text-center">Faça login na sua conta!</h3>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Login</label>
-                <input type="email" class="form-control" id="login-auth" aria-describedby="emailHelp">
+                <input type="email"
+                class="form-control"
+                id="login-auth"
+                aria-describedby="emailHelp"
+                required>
+                <div class="invalid-feedback"></div>
                 <div id="emailHelp" class="form-text">Não iremos compartilhar o seu e-mail com ninguém! (confia)</div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha-auth">
+                <input
+                type="password"
+                class="form-control"
+                id="senha-auth"
+                minlength="8"
+                required>
               </div>
+              <div class="invalid-feedback"></div>
               <button type="submit" class="btn btn-primary" onclick="authUser()">Logar</button>
         </form>
 </div>
 
 			<div class="alert alert-secondary" role="alert">
-        <form id="signup">
+        <form id="signup needs-validation" novalidate>
             <h2 class="fs-1 black fw-semibold text-center">Criar Conta</h1>
             <hr>
             <h3 class="fs-5 text-center">Insira os seus dados para criar uma conta!</h3>
             <div class="mb-3">
                 <label for="login" class="form-label">Login</label>
-                <input type="email" class="form-control" id="login" name="login" aria-describedby="emailHelp">
+                <input type="email"
+                class="form-control"
+                id="login"
+                name="login"
+                aria-describedby="emailHelp"
+                required>
+                <div class="invalid-feedback"></div>
                 <div id="emailHelp" class="form-text">Não iremos compartilhar o seu e-mail com ninguém! (confia)</div>
               </div>
               <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha" name="senha">
+                <label for="senha"class="form-label">Senha</label>
+                <input type="password"
+                class="form-control"
+                id="senha"
+                name="senha"
+                minlength="8"
+                required>
+                <div class="invalid-feedback"></div>
               </div>
               <div class="mb-3">
                 <label for="conf-senha" class="form-label">Confirmar senha</label>
-                <input type="password" class="form-control" id="conf-senha" name="conf-senha">
+                <input type="password"
+                class="form-control"
+                id="conf-senha"
+                name="conf-senha"
+                minlength="8"
+                required>
               </div>
               <div class="mb-3">
                 <label for="image" class="form-label">Imagem de Perfil</label>
                 <input type="file" class="form-control" id="image" name="image">
               </div>
-              <button type="submit" class="btn btn-primary">Criar conta</button>
+              <button type="submit" class="btn btn-primary">
+                <div class="spinner-border ms-3 d-none" role="status" id="loading-create-user">
+                <span class="visually-hidden">Loading...</span>
+              </div>Criar conta</button>
 </form>
 </div>
 
@@ -93,8 +124,18 @@
 
     <footer></footer>
     <script type="module">
+
+      const emptyErrors = {
+        name: 'Escolha o nome do usuário.',
+        email: 'Escolha o email do usuário.',
+        password: 'Escolha a senha do usuário com no mínimo 8 caracteres.',
+        confirmation_password:
+          'Escolha a confirmação de senha do usuário com no mínimo 8 caracteres.',
+      };
+
 			document.getElementById('signup').onsubmit = async (event) => {
         event.preventDefault();
+        document.querySelector('.spinner-border').classList.remove('d-none');
         // const emailInput = document.getElementById('login').value
         const senhaInput = document.getElementById('senha').value
         const senhaConf = document.getElementById('conf-senha').value
@@ -110,7 +151,22 @@
         const form = document.getElementById('signup');
         const newUser = new FormData(form);
 
+        const valid = () => {
+          const inputs = document.querySelectorAll('#signup input');
+
+          const valid = Array.from(inputs).every((input) =>
+            input.checkValidity()
+          );
+          return valid;
+        };
+
           const url = '/create-user';
+        // Parou aqui?
+          if (valid() && (await createUser(user))) {
+          // location.href = '/signin.html';
+        }
+
+        
 
           await fetch(url, {
             method: "POST",

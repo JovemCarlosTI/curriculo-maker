@@ -95,3 +95,24 @@ div.container {
     height: 48px;
     margin: 0 20px;
 }
+
+button[type=submit] {
+    max-height: 38px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    padding-left: auto;
+}
+
+#loading-create-user {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: white;
+    font-size: 24px;
+}
+
+.spinner-border {
+    margin-left: 0 !important;
+}
