@@ -59,15 +59,19 @@ Content-Type: multipart/form-data; boundary="boundary"
 Content-Disposition: form-data; name="image"; filename="milkshake.jpg"
 Content-Type: image/jpeg
 
-< ./public/imgs/foods/milkshake.jpg
+
 --boundary
 Content-Disposition: form-data; name="login"
 
-email5@gmail.com
+testeformdata@gmail.com
 --boundary
 Content-Disposition: form-data; name="senha"
 
-1234567
+12345678
+--boundary
+Content-Disposition: form-data; name="confSenha"
+
+12345678
 --boundary--
 
 ### Read All

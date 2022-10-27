@@ -105,7 +105,7 @@ button[type=submit] {
     padding-left: auto;
 }
 
-#loading-create-user {
+#loading-create-user, #loading-login-user {
     width: 24px;
     height: 24px;
     margin-right: 12px;

@@ -60,15 +60,18 @@ router.get('/pdf', (req, res) => {
 });
 
 router.post('/create-user',  
-multer(uploadConfig).single('image'),  celebrate({
+multer(uploadConfig).single('image'), celebrate({
   [Segments.BODY]: Joi.object().keys({
-    login: Joi.string().email(),
+    login: Joi.string().email().required(),
     senha: Joi.string().min(8),
-    confirmation_password: Joi.string().min(8)
+    confSenha: Joi.string().min(8),
+    //image: Joi.optional() // 👈️ usei o optional pq se não colocar nada ele dá erro
   }),
-}),
+}),  
+
 async (req, res) => {
 
+  console.log(req.body)
   const image = req.file
         ? `/imgs/foods/${req.file.filename}`
         : '/imgs/foods/placeholder.jpg';

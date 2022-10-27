@@ -45,14 +45,15 @@
 			</div>
 			<div class="alert alert-secondary" role="alert">
         <form id="signin needs-validation" novalidate>
-            <h2 class="fs-1 black fw-semibold text-center">Login</h1>
+            <h2 class="fs-1 black fw-semibold text-center" id="faça-login">Login</h1>
             <hr>
             <h3 class="fs-5 text-center">Faça login na sua conta!</h3>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Login</label>
                 <input type="email"
-                class="form-control"
+                class="form-control signinInput"
                 id="login-auth"
+                name="senha_auth"
                 aria-describedby="emailHelp"
                 required>
                 <div class="invalid-feedback"></div>
@@ -62,13 +63,18 @@
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
                 <input
                 type="password"
-                class="form-control"
+                class="form-control signinInput"
                 id="senha-auth"
                 minlength="8"
                 required>
               </div>
               <div class="invalid-feedback"></div>
-              <button type="submit" class="btn btn-primary" onclick="authUser()">Logar</button>
+              <div id="liveAlertPlaceholder-Login"></div>
+              <button type="submit" class="btn btn-primary" id="button-login">
+                <div class="spinner-border ms-3 d-none" role="status" id="loading-login-user">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                Logar</button>
         </form>
 </div>
 
@@ -80,7 +86,7 @@
             <div class="mb-3">
                 <label for="login" class="form-label">Login</label>
                 <input type="email"
-                class="form-control"
+                class="form-control signupInput"
                 id="login"
                 name="login"
                 aria-describedby="emailHelp"
@@ -91,7 +97,7 @@
               <div class="mb-3">
                 <label for="senha"class="form-label">Senha</label>
                 <input type="password"
-                class="form-control"
+                class="form-control signupInput"
                 id="senha"
                 name="senha"
                 minlength="8"
@@ -99,24 +105,26 @@
                 <div class="invalid-feedback"></div>
               </div>
               <div class="mb-3">
-                <label for="conf-senha" class="form-label">Confirmar senha</label>
+                <label for="confSenha" class="form-label">Confirmar senha</label>
                 <input type="password"
-                class="form-control"
-                id="conf-senha"
-                name="conf-senha"
+                class="form-control signupInput"
+                id="confSenha"
+                name="confSenha"
                 minlength="8"
-                required>
+                required>                
+                <div class="invalid-feedback"></div>
               </div>
               <div class="mb-3">
                 <label for="image" class="form-label">Imagem de Perfil</label>
-                <input type="file" class="form-control" id="image" name="image">
+                <input type="file" class="form-control signupInput" id="image" name="image">
               </div>
-              <button type="submit" class="btn btn-primary">
+              <div id="liveAlertPlaceholder"></div>
+              <button type="submit" class="btn btn-primary" id="submitBtn">
                 <div class="spinner-border ms-3 d-none" role="status" id="loading-create-user">
                 <span class="visually-hidden">Loading...</span>
               </div>Criar conta</button>
-</form>
-</div>
+        </form>
+      </div>
 
 
 
@@ -124,93 +132,201 @@
 
     <footer></footer>
     <script type="module">
+      //APENAS PARA FACILITAR A TESTAGEM
+      const c = console;
 
       const emptyErrors = {
-        name: 'Escolha o nome do usuário.',
-        email: 'Escolha o email do usuário.',
+        // name: 'Escolha o nome do usuário.', //acho que não precisa
+        login: 'Escolha o email do usuário.',
         password: 'Escolha a senha do usuário com no mínimo 8 caracteres.',
-        confirmation_password:
-          'Escolha a confirmação de senha do usuário com no mínimo 8 caracteres.',
+        confSenha: 'Escolha a confirmação de senha do usuário com no mínimo 8 caracteres.',
+        senha_auth: 'Insira uma senha válida com no mínimo 8 caracteres'
       };
 
-			document.getElementById('signup').onsubmit = async (event) => {
+      // FOI A ÚNICA FORMA QUE ACHEI 👇👇, NAO SEI QUAL O ERRO QUE ESTAVA DANDO
+      const form = document.querySelectorAll('form'); //pega os dois forms
+      const signup = form[1];// form de criar conta
+      const signin = form[0]; // form de logar
+
+			signup.onsubmit = async (event) => {
         event.preventDefault();
-        document.querySelector('.spinner-border').classList.remove('d-none');
-        // const emailInput = document.getElementById('login').value
-        const senhaInput = document.getElementById('senha').value
-        const senhaConf = document.getElementById('conf-senha').value
-        // const image = document.getElementById('image').value
 
-        if (senhaInput === senhaConf) {
-        // const newUser = {
-        //   "login": emailInput,
-        //   "senha": senhaInput,
-        //   "image": image
-        // }
+        document.querySelector('#submitBtn').disabled = true;
+        document.querySelector('#loading-create-user').classList.remove('d-none');
 
-        const form = document.getElementById('signup');
-        const newUser = new FormData(form);
+        const user = new FormData(signup);
+        console.log(user)
+
+        const form = signup;
+        // const newUser = new FormData(form);
 
         const valid = () => {
-          const inputs = document.querySelectorAll('#signup input');
-
+          const inputs = document.querySelectorAll('.signupInput');
           const valid = Array.from(inputs).every((input) =>
             input.checkValidity()
-          );
+          )
           return valid;
         };
 
           const url = '/create-user';
-        // Parou aqui?
-          if (valid() && (await createUser(user))) {
-          // location.href = '/signin.html';
+        if (valid() && (await createUser(user))) {
+          // location.href = '#signin';
+          // adicionei já que mudar a url nao funciona e precisamos avisar o usuario que deu certo
+
+          const sucessAlert = document.getElementById('liveAlertPlaceholder');
+
+          sucessAlert.innerHTML = `
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                Conta criada com sucesso!
+              </div>`          
         }
 
+        form.classList.add('was-validated');
+
+        document.querySelector('#loading-create-user').classList.add('d-none');
+        document.querySelector('#submitBtn').disabled = false;
+      
+      };
+
+      Array.from( // põe os erros na divs
+        document.querySelectorAll('.signupInput + .invalid-feedback')
+      ).forEach((element, index) => {
+        element.textContent = Object.values(emptyErrors)[index];
+        
+      });
+
+      Array.from(document.querySelectorAll('.signupInput')).map((input) => { // põe os erros na divs
+        input.addEventListener('.signupInput', () => {
+          input.setCustomValidity('');
+
+          if (input.value === '') {
+            const error = emptyErrors[input.name];
+            input.parentNode.querySelector('.invalid-feedback').innerText =
+              error;
+              
+
+            input.setCustomValidity(error);
+          }
+        });
+      });
+
+      signup.confSenha.addEventListener('input', () => { // verifica se a senha e a confirmação são iguais
+        const senha = signup.senha.value;
+        const confSenha = signup.confSenha.value;
+
+        if (senha !== confSenha) {
+          const error = 'As senhas não são iguais.';
+
+          const confirmationPasswordError = document.querySelector(
+            '#confSenha + .invalid-feedback'
+          );
+
+          confirmationPasswordError.textContent = error;
+
+          signup.confSenha.setCustomValidity(error);
+        } else {
+          signup.confSenha.setCustomValidity('');
+        }
+      });
+
+
+      //envia as informações de usuario pra criação
+        async function createUser(user) {
+          const url = '/create-user';
+          c.log(user)
+
+          const config = {
+            method: 'post',
+            body: user,
+          };
+
+          const response = await fetch(url, config);
+
+          if (response.ok) {
+            const newUser = await response.json();
+
+            return newUser;
+          } else {
+            const error = await response.json();
+
+            if (error.message === 'Email already exists') {
+              const error = 'Email já cadastrado.';
+
+              const emailError = document.querySelector(
+                '#login + .invalid-feedback'
+              );
+
+              emailError.textContent = error;
+
+              signin.login.setCustomValidity(error);
+            }
+
+            return false;
+          }
+        }
         
 
-          await fetch(url, {
-            method: "POST",
-            body: newUser,
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Success:", data);
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
+          // await fetch(url, {
+          //   method: "POST",
+          //   body: newUser,
+          // })
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     console.log("Success:", data);
+          //   })
+          //   .catch((error) => {
+          //     console.error("Error:", error);
+          //   });
 
             
-        }
-      }
-			document.getElementById('signin').onsubmit = authUser
-			
-
-      import Auth from './src/auth.js'
-			import Menu from './src/menu.js'
-			
-			document.body.onload = Menu.verifyAuth;
+        
       
-        document.getElementById('signin').addEventListener(
-            'submit', stopDefAction, false
-        );
-
-        document.getElementById('signup').addEventListener(
-            'submit', stopDefAction, false
-        );
-
-        function stopDefAction(evt) {
-            evt.preventDefault();
-        }
-
-        // Coleta e envia as infos para registrar
 
 
-      async function authUser() {
+      //AuthUser
+			signin.onsubmit = async (event) => {
+        
         const emailInput = document.getElementById('login-auth').value
         const senhaInput = document.getElementById('senha-auth').value
 
-        const authUser = {
+        // -- Começo para adaptar ao signin
+        c.log("Clicou!")
+        event.preventDefault();
+
+        document.querySelector('#button-login').disabled = true;
+        document.querySelector('#loading-login-user').classList.remove('d-none');
+
+        const user = Object.fromEntries(new FormData(signin));
+
+        const form = signin;
+        // const newUser = new FormData(form);
+
+        const valid = () => {
+          const inputs = document.querySelectorAll('.signinInput');
+          const valid = Array.from(inputs).every((input) =>
+            input.checkValidity()
+          )
+          return valid;
+        };
+
+          const url = '/auth-user';
+        // Parou aqui?
+        if (valid()) {
+          // location.href = '#signin';
+          // adicionei já que mudar a url nao funciona e precisamos avisar o usuario que deu certo
+          await connectAuth(user)
+        }
+
+        form.classList.add('was-validated');
+
+        document.querySelector('#loading-login-user').classList.add('d-none');
+        document.querySelector('#button-login').disabled = false;
+
+        // -- Fim para adaptar ao signin
+
+        // Para enviar request de conexão
+        async function connectAuth() {
+          const authUser = {
           "login": emailInput,
           "senha": senhaInput
         }
@@ -230,15 +346,85 @@
 
               if (auth) {
                 Auth.signin(token);
+
+                const sucessAlert = document.getElementById('liveAlertPlaceholder-Login');
+
+                sucessAlert.innerHTML = `
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                      Login realizado com sucesso! Redirecionando para o seu currículo.
+                      Não foi redirecionado? <a href="/">Acesse aqui a página home</a>
+                    </div>`
+
+                    window.location.href = '/'
+              } else {
+                // Se deu algum problema
+                const errorAlert = document.getElementById('liveAlertPlaceholder-Login');
+
+                errorAlert.innerHTML = `
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                      Login/senha informados estão incorretos! Por favor, tente novamente.
+                      O problema persiste? Entre em contato com a nossa equipe em curriculomaker@email.com
+                    </div>`
               }
 
-              window.location.href = '/'
             })
             .catch((error) => {
               console.error("Error:", error);
+
+              const errorAlert = document.getElementById('liveAlertPlaceholder-Login');
+
+              errorAlert.innerHTML = `
+                  <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    Erro desconhecido durante a tentativa de login! Tente novamente mais tarde!
+                    O problema persiste? Entre em contato com a nossa equipe em curriculomaker@email.com
+                  </div>`
             });
-        
         }
+      }
+      
+      Array.from(
+        document.querySelectorAll('.signinInput + .invalid-feedback')
+      ).forEach((element, index) => {
+        element.textContent = Object.values(emptyErrors)[index];
+        
+      });
+
+      Array.from(document.querySelectorAll('.signinInput')).map((input) => {
+        input.addEventListener('.signinInput', () => {
+          input.setCustomValidity('');
+
+          if (input.value === '') {
+            const error = emptyErrors[input.name];
+            input.parentNode.querySelector('.invalid-feedback').innerText =
+              error;
+              
+
+            input.setCustomValidity(error);
+          }
+        });
+      });
+
+      import Auth from './src/auth.js'
+			import Menu from './src/menu.js'
+			
+			document.body.onload = Menu.verifyAuth;
+      
+        signin.addEventListener(
+            'submit', stopDefAction, false
+        );
+
+        signup.addEventListener(
+            'submit', stopDefAction, false
+        );
+
+        function stopDefAction(evt) {
+            evt.preventDefault();
+        }
+
+        // Coleta e envia as infos para registrar
+
+
+      async function authUser() {}
     </script>
 </body>
 
